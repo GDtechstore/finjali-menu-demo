@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finjali — Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        :root {
+            --beige: #F5F0E8;
+            --beige-dark: #E8DFD0;
+            --beige-warm: #EDE6D5;
+            --green: #2D5A3D;
+            --green-light: #4A7A5C;
+            --green-deep: #1E3D2A;
+            --sage: #8FAE8A;
+            --sage-light: #A8C4A3;
+            --sage-muted: #B8D4B3;
+            --text: #2C2820;
+            --text-light: #6B6355;
+            --text-muted: #9A9185;
+            --white: #FFFFFF;
+            --gold: #C4A35A;
+            --gold-light: #D4BC8C;
+            --gold-pale: #E8DCC8;
+            --shadow-sm: 0 2px 8px rgba(45, 90, 61, 0.06);
+            --shadow: 0 8px 32px rgba(45, 90, 61, 0.08);
+            --shadow-lg: 0 20px 60px rgba(45, 90, 61, 0.12);
+            --shadow-xl: 0 30px 80px rgba(45, 90, 61, 0.16);
+            --radius-sm: 12px;
+            --radius: 20px;
+            --radius-lg: 28px;
+            --radius-xl: 40px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--beige);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--beige); }
+        ::-webkit-scrollbar-thumb { background: var(--sage-light); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--sage); }
+
+        .header {
+            background: linear-gradient(160deg, var(--green) 0%, var(--green-deep) 50%, #152e1f 100%);
+            color: var(--white);
+            padding: 80px 20px 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 420px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: 
+                radial-gradient(ellipse 80% 50% at 20% 40%, rgba(143,174,138,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 40% at 80% 60%, rgba(196,163,90,0.08) 0%, transparent 50%);
+            animation: breathe 8s ease-in-out infinite;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 120px;
+            background: linear-gradient(to top, var(--beige), transparent);
+            z-index: 2;
+        }
+
+        @keyframes breathe {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        .header-content { 
+            position: relative; 
+            z-index: 3; 
+            max-width: 600px;
+        }
+
+        .logo-ring {
+            width: 100px; height: 100px;
+            margin: 0 auto 28px;
+            position: relative;
+        }
+
+        .logo-ring::before {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 1px solid rgba(143,174,138,0.3);
+            animation: spin-slow 20s linear infinite;
+        }
+
+        .logo-ring::after {
+            content: '';
+            position: absolute;
+            inset: -12px;
+            border-radius: 50%;
+            border: 1px dashed rgba(143,174,138,0.15);
+            animation: spin-slow 30s linear infinite reverse;
+        }
+
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .logo {
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, var(--sage), var(--green-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--white);
+            border: 3px solid rgba(255,255,255,0.2);
+            box-shadow: 
+                0 0 40px rgba(143,174,138,0.25),
+                inset 0 2px 10px rgba(255,255,255,0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 52px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+        }
+
+        .header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -8px; left: 50%;
+            transform: translateX(-50%);
+            width: 60px; height: 2px;
+            background: var(--gold);
+            border-radius: 1px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.7;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: 20px;
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 24px;
+            padding: 8px 20px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 30px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            backdrop-filter: blur(10px);
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 4;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
+            50% { transform: translateX(-50%) translateY(-8px); opacity: 0.8; }
+        }
+
+        .nav {
+            position: sticky;
+            top: 0;
+            background: rgba(245, 240, 232, 0.85);
+            backdrop-filter: blur(20px) saturate(1.2);
+            -webkit-backdrop-filter: blur(20px) saturate(1.2);
+            z-index: 100;
+            border-bottom: 1px solid rgba(232,223,208,0.6);
+            padding: 14px 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nav::-webkit-scrollbar { display: none; }
+
+        .nav-inner {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            padding: 0 20px;
+            min-width: max-content;
+            position: relative;
+        }
+
+        .nav a {
+            text-decoration: none;
+            pointer-events: auto;
+            color: var(--text-light);
+            font-size: 12px;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav a::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--green);
+            border-radius: 30px;
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+
+        .nav a.active {
+            color: var(--white);
+        }
+
+        .nav a.active::before {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* Le :hover ne s'applique qu'aux appareils avec une vraie souris.
+           Sur mobile, le tap laissait sinon l'état hover collé au lien,
+           ce qui faisait croire que la catégorie restait sélectionnée. */
+        @media (hover: hover) and (pointer: fine) {
+            .nav a:hover {
+                color: var(--white);
+            }
+
+            .nav a:hover::before {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .section {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 70px 24px;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-eyebrow {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .section-eyebrow::before,
+        .section-eyebrow::after {
+            content: '—';
+            margin: 0 12px;
+            opacity: 0.4;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
+            font-weight: 600;
+            color: var(--green);
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 15px;
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+        }
+
+        .section-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin: 0 auto;
+            max-width: 200px;
+        }
+
+        .section-divider::before,
+        .section-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--beige-dark), transparent);
+        }
+
+        .section-divider-icon {
+            width: 8px; height: 8px;
+            background: var(--sage-light);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .section-divider-icon::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border: 1px solid var(--sage-light);
+            border-radius: 50%;
+            opacity: 0.4;
+        }
+
+        .menu-grid { 
+            display: grid; 
+            gap: 14px; 
+        }
+
+        .menu-grid .note-box { margin: 8px 0 4px; }
+
+        .menu-item {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(232,223,208,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0;
+            width: 3px; height: 100%;
+            background: linear-gradient(to bottom, var(--sage), var(--green-light));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .menu-item:hover {
+                transform: translateY(-3px) scale(1.01);
+                box-shadow: var(--shadow-lg);
+                border-color: var(--sage-light);
+            }
+
+            .menu-item:hover::before {
+                opacity: 1;
+            }
+        }
+
+        .menu-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .menu-item-info h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 5px;
+            letter-spacing: -0.2px;
+        }
+
+        .menu-item-info p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .menu-item-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--green);
+            white-space: nowrap;
+            margin-left: 8px;
+            position: relative;
+        }
+
+        .menu-item-price::after {
+            content: 'DA';
+            font-size: 11px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-left: 2px;
+            opacity: 0.7;
+        }
+
+        .price-row {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .price-tag { 
+            text-align: center; 
+            position: relative;
+            padding: 4px 12px;
+            background: var(--beige);
+            border-radius: 10px;
+            border: 1px solid var(--beige-dark);
+        }
+
+        .price-tag small {
+            display: block;
+            font-size: 9px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 1.5px;
+            margin-bottom: 2px;
+        }
+
+        .price-tag span {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--green);
+        }
+
+        .note-box {
+            background: linear-gradient(135deg, rgba(232,223,208,0.6), rgba(245,240,232,0.8));
+            border-left: 3px solid var(--sage);
+            padding: 22px 28px;
+            border-radius: 0 16px 16px 0;
+            margin: 35px 0;
+            font-size: 14px;
+            color: var(--text-light);
+            font-style: italic;
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+
+        .note-box::before {
+            content: 'i';
+            position: absolute;
+            left: -14px; top: 50%;
+            transform: translateY(-50%);
+            width: 26px; height: 26px;
+            background: var(--sage);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            font-style: normal;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 2px 8px rgba(143,174,138,0.3);
+        }
+
+        .qr-section {
+            background: linear-gradient(160deg, var(--green) 0%, var(--green-deep) 50%, #152e1f 100%);
+            color: var(--white);
+            padding: 80px 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .qr-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: 
+                radial-gradient(ellipse 60% 40% at 30% 30%, rgba(196,163,90,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 50% at 70% 70%, rgba(143,174,138,0.1) 0%, transparent 50%);
+        }
+
+        .qr-section::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 80px;
+            background: linear-gradient(to bottom, var(--beige), transparent);
+        }
+
+        .qr-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .qr-section > p {
+            opacity: 0.7;
+            margin-bottom: 35px;
+            font-size: 15px;
+            position: relative;
+            z-index: 1;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .qr-input-group {
+            max-width: 520px;
+            margin: 0 auto 35px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .qr-input-group input {
+            flex: 1;
+            min-width: 260px;
+            padding: 16px 22px;
+            border: 1.5px solid rgba(255,255,255,0.15);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.06);
+            color: var(--white);
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .qr-input-group input::placeholder { color: rgba(255,255,255,0.35); }
+        .qr-input-group input:focus {
+            border-color: var(--sage-light);
+            background: rgba(255,255,255,0.1);
+            box-shadow: 0 0 20px rgba(143,174,138,0.15);
+        }
+
+        .qr-btn {
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--sage), var(--green-light));
+            color: var(--white);
+            border: none;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .qr-btn::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .qr-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(143,174,138,0.3);
+        }
+
+        .qr-btn:hover::after {
+            left: 100%;
+        }
+
+        .qr-result {
+            display: none;
+            margin-top: 40px;
+            animation: reveal 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            position: relative;
+            z-index: 1;
+        }
+
+        .qr-result.active { display: block; }
+
+        @keyframes reveal {
+            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .qr-canvas-wrap {
+            background: var(--white);
+            padding: 35px;
+            border-radius: var(--radius-lg);
+            display: inline-block;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+        }
+
+        .qr-canvas-wrap::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: calc(var(--radius-lg) + 3px);
+            background: linear-gradient(135deg, var(--sage-light), var(--gold-light));
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        #qrcode img, #qrcode canvas {
+            display: block;
+            max-width: 100%;
+        }
+
+        .qr-url-display {
+            margin-top: 16px;
+            font-size: 13px;
+            opacity: 0.6;
+            word-break: break-all;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: 'Inter', monospace;
+            letter-spacing: 0.5px;
+        }
+
+        .qr-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        .qr-download:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--beige-dark);
+            color: var(--text-muted);
+            font-size: 13px;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 60px; height: 3px;
+            background: var(--sage-light);
+            border-radius: 0 0 3px 3px;
+        }
+
+        .footer strong { 
+            color: var(--green); 
+            font-weight: 600;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        @media (max-width: 640px) {
+            .header { padding: 60px 20px 80px; min-height: 350px; }
+            .header h1 { font-size: 36px; letter-spacing: 4px; }
+            .logo-ring { width: 80px; height: 80px; }
+            .logo { font-size: 28px; }
+            .section { padding: 50px 16px; }
+            .section-title { font-size: 30px; }
+            .menu-item { padding: 14px 16px; gap: 14px; }
+            .menu-item-info h3 { font-size: 15px; }
+            .menu-item-price { font-size: 18px; }
+            .price-row { gap: 12px; }
+            .price-tag { padding: 3px 10px; }
+            .price-tag span { font-size: 16px; }
+            .qr-section h2 { font-size: 28px; }
+            .qr-input-group input { min-width: 100%; }
+        }
+    
+        .menu-group { display: none; }
+        .menu-group.active {
+            display: block;
+            animation: groupIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes groupIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .group-banner {
+            max-width: 780px;
+            margin: 50px auto 0;
+            padding: 32px 24px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(143,174,138,0.14), rgba(196,163,90,0.1));
+            border: 1px solid rgba(143,174,138,0.3);
+            border-radius: var(--radius-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .group-banner::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 80px; height: 3px;
+            background: linear-gradient(90deg, var(--sage-light), var(--gold-light));
+            border-radius: 0 0 3px 3px;
+        }
+
+        .group-banner h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            font-weight: 600;
+            color: var(--green);
+            margin-bottom: 6px;
+        }
+
+        .group-banner p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+    
+        /* Section QR cachée pour les clients — accessible via ?admin ou #admin */
+        .qr-section, #qrLink { display: none; }
+        body.admin-mode .qr-section { display: block; }
+        body.admin-mode #qrLink { display: inline-flex; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-ring">
+                <div class="logo">F</div>
+            </div>
+            <h1>FINJALI</h1>
+            <p>Menu</p>
+            <div class="header-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0.7">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                Salon de Thé & Gourmandises
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6">
+                <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-tab active" data-group="bar">Boissons &amp; Desserts</a>
+            <a href="#" class="nav-tab" data-group="sale">Salé &amp; Snacks</a>
+            <a href="#" class="nav-link" id="qrLink">QR Code</a>
+        </div>
+    </nav>
+
+    <div class="menu-group active" id="group-bar">
+        <div class="group-banner">
+            <h2>Boissons &amp; Desserts</h2>
+            <p>Boissons chaudes &amp; fraîches, mojitos, milkshakes, cocktails, crêpes, waffles, pancakes &amp; fruits</p>
+        </div>
+        <section class="section" id="chaudes">
+        <div class="section-header reveal">
+            <div class="section-eyebrow">Découvrez</div>
+            <h2 class="section-title">Boissons Chaudes</h2>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Café Espresso</h3>
+                    <p>Café court et intense</p>
+                </div>
+                <div class="menu-item-price">100</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Capsule</h3>
+                    <p>Café en capsule</p>
+                </div>
+                <div class="price-row">
+                    <div class="price-tag"><small>Classique</small><span>150</span></div>
+                    <div class="price-tag"><small>Premium</small><span>250</span></div>
+                </div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Café Viennois</h3>
+                    <p>Espresso, crème chantilly</p>
+                </div>
+                <div class="menu-item-price">200</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Café au Lait Séparé</h3>
+                    <p>Espresso et lait à part</p>
+                </div>
+                <div class="menu-item-price">150</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Latte / Cappuccino</h3>
+                    <p>Espresso et lait chauffé</p>
+                </div>
+                <div class="menu-item-price">200</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Caramel Macchiato</h3>
+                    <p>Latte caramel onctueux</p>
+                </div>
+                <div class="menu-item-price">300</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Affogato</h3>
+                    <p>Espresso sur glace — Vanille / Chocolat</p>
+                </div>
+                <div class="menu-item-price">350</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Chocolat Chaud</h3>
+                </div>
+                <div class="menu-item-price">500</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Chocolat Viennois</h3>
+                    <p>Chocolat chaud et crème chantilly</p>
+                </div>
+                <div class="menu-item-price">600</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Thé Maison</h3>
+                </div>
+                <div class="menu-item-price">100</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Thé Infusion</h3>
+                </div>
+                <div class="menu-item-price">200</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider reveal">
+        <div class="section-divider-icon"></div>
+    </div>
+
+    <section class="section" id="fraiches">
+        <div class="section-header reveal">
+            <div class="section-eyebrow">Rafraîchissez-vous</div>
+            <h2 class="section-title">Boissons Fraîches</h2>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Jus Pressé Naturel</h3>
+                    <p>Fraîchement pressé</p>
+                </div>
+                <div class="menu-item-price">300</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Citronnade Maison</h3>
+                    <p>Citron frais maison</p>
+                </div>
+                <div class="menu-item-price">300</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Diabolo Vichy</h3>
+                    <p>Menthe / Grenade</p>
+                </div>
+                <div class="menu-item-price">150</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Eau Minérale PM</h3>
+                    <p>Petite bouteille</p>
+                </div>
+                <div class="menu-item-price">50</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Eau Minérale GM</h3>
+                    <p>Grande bouteille</p>
+                </div>
+                <div class="menu-item-price">100</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Vichy</h3>
+                    <p>Eau gazeuse</p>
+                </div>
+                <div class="menu-item-price">100</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Canette Soda</h3>
+                </div>
+                <div class="menu-item-price">150</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider reveal">
+        <div class="section-divider-icon"></div>
+    </div>
+
+    <section class="section" id="mojitos">
+        <div class="section-header reveal">
+            <div class="section-eyebrow">Cocktails</div>
+            <h2 class="section-title">Mojitos</h2>
+            <p class="section-subtitle">Fraîcheur et saveurs</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Classic ou Mixte</h3>
+                </div>
+                <div class="menu-item-price">400</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Red</h3>
+                    <p>Fraise ou Fruits Rouge</p>
+                </div>
+                <div class="menu-item-price">500</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Passion</h3>
+                    <p>Fruit de la passion</p>
+                </div>
+                <div class="menu-item-price">500</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Dark Black</h3>
+                    <p>Au Coca</p>
+                </div>
+                <div class="menu-item-price">500</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Golden</h3>
+                    <p>Au Izem</p>
+                </div>
+                <div class="menu-item-price">500</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Energy</h3>
+                    <p>Au Red Bull</p>
+                </div>
+                <div class="menu-item-price">900</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider reveal">
+        <div class="section-divider-icon"></div>
+    </div>
+
+    <section class="section" id="milkshakes">
+        <div class="section-header reveal">
+            <div class="section-eyebrow">Gourmandise</div>
+            <h2 class="section-title">Milkshakes & Frappé</h2>
+            <p class="section-subtitle">Onctuosité et gourmandise</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Milkshake Solo</h3>
+                    <p>1 ingrédient au choix</p>
+                </div>
+                <div class="menu-item-price">600</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Milkshake Mix</h3>
+                    <p>2 ingrédients au choix</p>
+                </div>
+                <div class="menu-item-price">700</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Milkshake Oriental</h3>
+                    <p>Banane, dattes, miel, mokasarat, glace vanille</p>
+                </div>
+                <div class="menu-item-price">900</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Frappuccino Café</h3>
+                    <p>Vanille / Caramel / Chocolat</p>
+                </div>
+                <div class="menu-item-price">700</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider reveal">
+        <div class="section-divider-icon"></div>
+    </div>
+
+    <section class="section" id="cocktails">
+        <div class="section-header reveal">
+            <div class="section-eyebrow">Exotiques</div>
+            <h2 class="section-title">Cocktails & Mocktails</h2>
+            <p class="section-subtitle">Créations fruitées</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Cocktail Fruits de Saison</h3>
+                    <p>Assortiment de fruits frais</p>
+                </div>
+                <div class="menu-item-price">600</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Pêche Passion</h3>
+                    <p>Pêche, citron, ananas, fruit de la passion</p>
+                </div>
+                <div class="menu-item-price">600</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Piña Colada</h3>
+                    <p>Ananas, citron, coco</p>
+                </div>
+                <div class="menu-item-price">600</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Pink Lady</h3>
+                    <p>Grenadine, framboise, ananas, citron</p>
+                </div>
+                <div class="menu-item-price">600</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Bora Bora</h3>
+                    <p>Fruit de la passion, orange, grenadine, ananas, citron</p>
+                </div>
+                <div class="menu-item-price">600</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Mocktail du Chef</h3>
+                    <p>La création du moment</p>
+                </div>
+                <div class="menu-item-price">600</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider reveal">
+        <div class="section-divider-icon"></div>
+    </div>
+
+    <section class="section" id="crepes">
+        <div class="section-header reveal">
+            <div class="section-eyebrow">Douceurs</div>
+            <h2 class="section-title">Crêpes</h2>
+            <p class="section-subtitle">Fines et gourmande</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>3 Choco</h3>
+                    <p>Trois chocolats fondants</p>
+                </div>
+                <div class="menu-item-price">400</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Confi Abricot</h3>
+                    <p>Fraise + Banane</p>
+                </div>
+                <div class="menu-item-price">400</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>3 Choco</h3>
+                    <p>Fraise + Banane</p>
+                </div>
+                <div class="menu-item-price">600</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Tagliato</h3>
+                    <p>Spécialité maison</p>
+                </div>
+                <div class="menu-item-price">800</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Finjali</h3>
+                    <p>Notre création signature</p>
+                </div>
+                <div class="menu-item-price">1000</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider reveal">
+        <div class="section-divider-icon"></div>
+    </div>
+
+    <section class="section" id="waffles">
+        <div class="section-header reveal">
+            <div class="section-eyebrow">Gaufres</div>
+            <h2 class="section-title">Waffles</h2>
+            <p class="section-subtitle">Croustillantes et dorées</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>3 Choco</h3>
+                    <p>Trois chocolats fondants</p>
+                </div>
+                <div class="menu-item-price">400</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Confi Abricot</h3>
+                    <p>Fraise + Banane</p>
+                </div>
+                <div class="menu-item-price">500</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>3 Choco</h3>
+                    <p>Fraise + Banane</p>
+                </div>
+                <div class="menu-item-price">600</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Beurre & Sirop d'Érable</h3>
+                    <p>Beurre et sirop d'érable pur</p>
+                </div>
+                <div class="menu-item-price">600</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Finjali</h3>
+                    <p>Notre création signature</p>
+                </div>
+                <div class="menu-item-price">1000</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider reveal">
+        <div class="section-divider-icon"></div>
+    </div>
+
+    <section class="section" id="pancakes">
+        <div class="section-header reveal">
+            <div class="section-eyebrow">Moelleux</div>
+            <h2 class="section-title">Pancakes</h2>
+            <p class="section-subtitle">Moelleux et gourmands</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>3 Choco</h3>
+                    <p>Trois chocolats fondants</p>
+                </div>
+                <div class="menu-item-price">500</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Confi Abricot</h3>
+                    <p>Fraise + Banane</p>
+                </div>
+                <div class="menu-item-price">500</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>3 Choco</h3>
+                    <p>Fraise + Banane</p>
+                </div>
+                <div class="menu-item-price">600</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Beurre & Sirop d'Érable</h3>
+                    <p>Beurre et sirop d'érable pur</p>
+                </div>
+                <div class="menu-item-price">600</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Finjali</h3>
+                    <p>Notre création signature</p>
+                </div>
+                <div class="menu-item-price">1000</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider reveal">
+        <div class="section-divider-icon"></div>
+    </div>
+
+    <section class="section" id="fruits">
+        <div class="section-header reveal">
+            <div class="section-eyebrow">Fraîcheur</div>
+            <h2 class="section-title">Fruits</h2>
+            <p class="section-subtitle">Fruits frais et gourmands</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Gobelet Fruitella</h3>
+                    <p>Coupe de fruits gourmande</p>
+                </div>
+                <div class="menu-item-price">500</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Gobelet Crêpe Tagliato</h3>
+                    <p>Crêpe et fruits en coupe</p>
+                </div>
+                <div class="menu-item-price">600</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Salade de Fruits</h3>
+                    <p>Assortiment de fruits frais</p>
+                </div>
+                <div class="menu-item-price">400</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Mix Mokassarat</h3>
+                    <p>Assortiment de fruits secs</p>
+                </div>
+                <div class="menu-item-price">800</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Assiette Fruits de Saison</h3>
+                    <p>Plateau de fruits frais du moment</p>
+                </div>
+                <div class="menu-item-price">1000</div>
+            </div>
+        </div>
+    </section>
+
+    </div>
+
+    <div class="menu-group" id="group-sale">
+        <div class="group-banner">
+            <h2>Salé &amp; Snacks</h2>
+            <p>Frites, burgers, tacos, sandwiches, plats chauds &amp; suppléments</p>
+        </div>
+        <section class="section" id="frite">
+        <div class="section-header reveal">
+            <h2 class="section-title">Frites</h2>
+             <p class="section-subtitle">fraîches & croustillantes</p>
+
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Barquette de Frites</h3>
+                    <p>Frites classiques croustillantes</p>
+                </div>
+                <div class="menu-item-price">150</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Frites Fromagères</h3>
+                    <p>Frites avec sauce fromagère</p>
+                </div>
+                <div class="menu-item-price">200</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Poutine Poulet</h3>
+                    <p>Frites, poulet, sauce fromagère</p>
+                </div>
+                <div class="menu-item-price">400</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Poutine Viande</h3>
+                    <p>Frites, viande hachée, sauce fromagère</p>
+                </div>
+                <div class="menu-item-price">450</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Poutine Crispy</h3>
+                    <p>Frites, poulet pané croustillant, sauce fromagère</p>
+                </div>
+                <div class="menu-item-price">450</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Poutine Mixte</h3>
+                    <p>Frites, viande et poulet, sauce fromagère</p>
+                </div>
+                <div class="menu-item-price">450</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider reveal">
+        <div class="section-divider-icon"></div>
+    </div>
+
+    <section class="section" id="burgers">
+        <div class="section-header reveal">
+            <h2 class="section-title">Burgers</h2>
+            <p class="section-subtitle">Classiques & Signature</p>
+        </div>
+        <div class="menu-grid">
+            <div class="note-box reveal">Nos Burgers Classiques</div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Classic Viande</h3>
+                    <p>Salade, tomate, viande, cheddar, sauce maison</p>
+                </div>
+                <div class="menu-item-price">400</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Classic Poulet</h3>
+                    <p>Salade, tomate, poulet, cheddar, sauce maison</p>
+                </div>
+                <div class="menu-item-price">350</div>
+            </div>
+            <div class="note-box reveal">Nos Burgers Signature</div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Le Chef</h3>
+                    <p>Salade, tomate, viande, oignon caramélisé, poulet fumé, cheddar, sauce burger</p>
+                </div>
+                <div class="menu-item-price">500</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>4 Fromages</h3>
+                    <p>Salade, tomate, viande, cheddar, Gruyère, camembert, sauce fromagère</p>
+                </div>
+                <div class="menu-item-price">450</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Finjali</h3>
+                    <p>100g viande, salade, tomate, oignon caramélisé, gruyère, sauce champignons</p>
+                </div>
+                <div class="menu-item-price">700</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider reveal">
+        <div class="section-divider-icon"></div>
+    </div>
+
+    <section class="section" id="tacos">
+        <div class="section-header reveal">
+            <h2 class="section-title">Tacos</h2>
+            <p class="section-subtitle">Classiques & Signature</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Viande</h3>
+                    <p>Viande, frites, sauce fromagère + sauce au choix</p>
+                </div>
+                <div class="menu-item-price">550</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Poulet</h3>
+                    <p>Poulet, frites, sauce fromagère + sauce au choix</p>
+                </div>
+                <div class="menu-item-price">500</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Crispy</h3>
+                    <p>Poulet pané, frites, sauce fromagère + sauce au choix</p>
+                </div>
+                <div class="menu-item-price">600</div>
+            </div>
+            <div class="note-box reveal">Nos Tacos Signature</div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Le Chef</h3>
+                    <p>Viande, frites, sauce fromagère + sauce au choix, gratiné au camembert et cheddar</p>
+                </div>
+                <div class="menu-item-price">750</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Finjali</h3>
+                    <p>Viande, frites, sauce fromagère + sauce au choix, gratiné au poulet fumé et cheddar</p>
+                </div>
+                <div class="menu-item-price">750</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Supplément Gratiné pour Tacos</h3>
+                </div>
+                <div class="menu-item-price">200</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider reveal">
+        <div class="section-divider-icon"></div>
+    </div>
+
+    <section class="section" id="sandwich">
+        <div class="section-header reveal">
+            <h2 class="section-title">Sandwich</h2>
+            <p class="section-subtitle">Gratinés & Gourmands</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Poulet Mariné</h3>
+                    <p>Salade, tomate, poulet mariné, sauce maison, gratiné au fromage cheddar</p>
+                </div>
+                <div class="menu-item-price">400</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Viande</h3>
+                    <p>Salade, tomate, viande, sauce maison, gratiné au fromage cheddar</p>
+                </div>
+                <div class="menu-item-price">500</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Crevettes</h3>
+                    <p>Œuf, salade, tomate, crevettes, cornichons, sauce fromagère</p>
+                </div>
+                <div class="menu-item-price">600</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Crevettes 4 Fromages</h3>
+                    <p>Salade, tomate, crevettes, cornichons, gruyère, sauce fromagère</p>
+                </div>
+                <div class="menu-item-price">800</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider reveal">
+        <div class="section-divider-icon"></div>
+    </div>
+
+    <section class="section" id="plats">
+        <div class="section-header reveal">
+            <h2 class="section-title">Plats</h2>
+            <p class="section-subtitle">Viandes & Spécialités</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Poulet Grillé</h3>
+                    <p>Légumes sautés, poulet grillé, œuf, frites épicées</p>
+                </div>
+                <div class="menu-item-price">800</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Poulet à la Crème aux Champignons</h3>
+                    <p>Légumes sautés, poulet, œuf, frites épicées</p>
+                </div>
+                <div class="menu-item-price">1000</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Entrecôte</h3>
+                    <p>Légumes sautés, tranche d'entrecôte, œuf, frites épicées</p>
+                </div>
+                <div class="menu-item-price">1600</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Steak</h3>
+                    <p>Légumes sautés, tranche de steak, œuf, frites épicées</p>
+                </div>
+                <div class="menu-item-price">1500</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>L3edja</h3>
+                    <p>Merguez grillées, frites</p>
+                </div>
+                <div class="menu-item-price">1200</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Filet de Bœuf</h3>
+                </div>
+                <div class="menu-item-price">2200</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Crevettes</h3>
+                </div>
+                <div class="menu-item-price">1600</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Espadon</h3>
+                </div>
+                <div class="menu-item-price">1600</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>La Paella (1 Personne)</h3>
+                </div>
+                <div class="menu-item-price">2500</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>La Paella (2 Personnes)</h3>
+                </div>
+                <div class="menu-item-price">3500</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider reveal">
+        <div class="section-divider-icon"></div>
+    </div>
+
+    <section class="section" id="supplements">
+        <div class="section-header reveal">
+            <div class="section-eyebrow">Extras</div>
+            <h2 class="section-title">Nos Suppléments</h2>
+            <p class="section-subtitle">Personnalisez votre plat</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Oignon Caramélisé</h3>
+                </div>
+                <div class="menu-item-price">100</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Œuf</h3>
+                </div>
+                <div class="menu-item-price">100</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Cheddar</h3>
+                </div>
+                <div class="menu-item-price">200</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3>Camembert</h3>
+                </div>
+                <div class="menu-item-price">250</div>
+            </div>
+            <div class="menu-item reveal reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3>Gruyère</h3>
+                </div>
+                <div class="menu-item-price">250</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider reveal">
+        <div class="section-divider-icon"></div>
+    </div>
+
+    </div>
+    
+
+    <section class="qr-section" id="qr">
+        <h2>QR Code Menu</h2>
+        <p>Générez le QR code à placer sur les tables pour que vos clients accèdent au menu.</p>
+        <div class="qr-input-group">
+            <input type="text" id="qrUrl" placeholder="https://votrecafe.com/menu">
+            <button class="qr-btn" onclick="generateQR()">Générer le QR Code</button>
+        </div>
+        <div id="qrResult" class="qr-result">
+            <div class="qr-canvas-wrap">
+                <div id="qrcode"></div>
+            </div>
+            <div class="qr-url-display" id="qrUrlDisplay"></div>
+            <button class="qr-download" onclick="downloadQR()">⬇️ Télécharger le QR Code (PNG)</button>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p><strong>Finjali</strong> — Votre moment de détente</p>
+    </footer>
+
+<script>
+let currentQR = null;
+
+// Mode admin : ajoutez ?admin ou #admin à l'URL pour voir la section QR Code
+const isAdmin = /[?#&]admin/.test(window.location.href);
+if (isAdmin) {
+    document.body.classList.add('admin-mode');
+    document.getElementById('qrLink').style.display = '';
+}
+
+window.addEventListener('load', function() {
+    const currentUrl = window.location.href.split('?')[0].split('#')[0];
+    document.getElementById('qrUrl').value = currentUrl;
+    setTimeout(generateQR, 600);
+});
+
+function generateQR() {
+    const url = document.getElementById('qrUrl').value.trim();
+    if (!url) {
+        alert("Veuillez entrer l'URL du menu !");
+        return;
+    }
+
+    const container = document.getElementById('qrcode');
+    container.innerHTML = '';
+
+    try {
+        currentQR = new QRCode(container, {
+            text: url,
+            width: 400,
+            height: 400,
+            colorDark: "#2D5A3D",
+            colorLight: "#FFFFFF",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+
+        document.getElementById('qrUrlDisplay').textContent = url;
+        document.getElementById('qrResult').classList.add('active');
+
+    } catch (e) {
+        console.error(e);
+        alert('Erreur lors de la génération du QR code : ' + e.message);
+    }
+}
+
+function downloadQR() {
+    const container = document.getElementById('qrcode');
+    const img = container.querySelector('img');
+    const canvas = container.querySelector('canvas');
+
+    if (img && img.src) {
+        const link = document.createElement('a');
+        link.download = 'finjali-menu-qr.png';
+        link.href = img.src;
+        link.click();
+    } else if (canvas) {
+        const link = document.createElement('a');
+        link.download = 'finjali-menu-qr.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    }
+}
+
+const tabs = document.querySelectorAll('.nav-tab');
+const groups = {
+    sale: document.getElementById('group-sale'),
+    bar: document.getElementById('group-bar')
+};
+
+function showGroup(name) {
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.group === name));
+    groups.sale.classList.toggle('active', name === 'sale');
+    groups.bar.classList.toggle('active', name === 'bar');
+    const navHeight = document.querySelector('.nav').offsetHeight;
+    window.scrollTo({ top: navHeight, behavior: 'smooth' });
+}
+
+tabs.forEach(tab => {
+    tab.addEventListener('click', e => {
+        e.preventDefault();
+        showGroup(tab.dataset.group);
+    });
+});
+
+document.getElementById('qrLink').addEventListener('click', e => {
+    e.preventDefault();
+    const qr = document.getElementById('qr');
+    const navHeight = document.querySelector('.nav').offsetHeight;
+    const pos = qr.getBoundingClientRect().top + window.pageYOffset - navHeight - 16;
+    window.scrollTo({ top: pos, behavior: 'smooth' });
+});
+
+const revealElements = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -40px 0px'
+});
+
+revealElements.forEach(el => revealObserver.observe(el));
+</script>
+</body>
+</html>
